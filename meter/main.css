@@ -1,0 +1,15 @@
+a {
+  text-decoration: none !important;
+}
+
+h6 {
+  display: inline-block;
+}
+
+ul li a {
+    color: #212429;
+}
+
+ul li a:hover {
+    color: #212429;
+}
