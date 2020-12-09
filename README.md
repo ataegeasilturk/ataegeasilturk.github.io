@@ -8,3 +8,7 @@ A web page which contains projects by Ata Ege Asiltürk.
 ### Chronometer
 
 A basic chronometer project. You can start, stop, reset and save the current time. Some fixes soon...
+
+### Todo List
+
+A todo list project. You can save your todos because the project is going to work with cookies.
