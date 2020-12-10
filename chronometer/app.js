@@ -110,32 +110,20 @@ function clearAllSave() {
   saveCount = 0;
 };
 
-// function clearSave() {
-//   // saveList = document.getElementById("savings");
-//   // saveList.innerHTML = " ";
-//   $("#save").click(function(){
-//     this.remove()
-//   });
-// };
-
-// saveElement.addEventListener("click", function(e){
-//    console.log(e.target);
-// });
-
 // Keyboard Shortcuts
 
-// document.addEventListener("DOMContentLoaded", function (e) {
-//   document.addEventListener("keydown", function (e) {
-//     let key = e.key
+document.addEventListener("DOMContentLoaded", function (e) {
+  document.addEventListener("keydown", function (e) {
+    let key = e.key
 
-//     if (key == " ") {
-//       if (time.stopped) {
-//         start();
-//       } else if (!time.stopped) {
-//         stop();
-//       };
-//     } else {
-//       console.log(`Nothing is assigned to "${key}" key.`)
-//     };
-//   });
-// });
+    if (key == " ") {
+      if (time.stopped) {
+        start();
+      } else if (!time.stopped) {
+        stop();
+      };
+    } else {
+      console.log(`Nothing is assigned to "${key}" key.`)
+    };
+  });
+});
