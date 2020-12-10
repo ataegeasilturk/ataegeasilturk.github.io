@@ -91,36 +91,37 @@ function save() {
   } else {
     ss = `${time.ms}`;
   };
-  saveCount=+1;
+  saveCount = +1;
   saveList = document.getElementById("savings");
   // saveList.innerHTML = `${saveList.innerHTML}<li class="list-group-item d-flex justify-content-center" style="font-size:1.5rem;" id="save"><a href="#" data-toggle="tooltip" data-placement="top" title="Click to delete!">${min}:${second}:${ss}</a></li>`;
   saveList.innerHTML = `${saveList.innerHTML}<li class="list-group-item d-flex justify-content-center" style="font-size:1.5rem;" id="save"><a href="#">${min}:${second}:${ss}</a></li>`;
 };
 
-function clearSave() {
-  // saveList = document.getElementById("savings");
-  // saveList.innerHTML = " ";
-  $("#save").click(function(){
-    this.remove()
-  });
-};
+// function clearSave() {
+//   // saveList = document.getElementById("savings");
+//   // saveList.innerHTML = " ";
+//   $("#save").click(function(){
+//     this.remove()
+//   });
+// };
 
 // saveElement.addEventListener("click", function(e){
 //    console.log(e.target);
 // });
 
 // Keyboard Shortcuts
+document.addEventListener("DOMContentLoaded", function (e) {
+  document.addEventListener("keydown", function (e) {
+    let key = e.key
 
-document.addEventListener("keydown", function(e){
-  let key = e.key
-
-  if (key == " ") {
-    if (time.stopped) {
-      start();
-    } else if (!time.stopped) {
-      stop();
-    } 
-  } else {
-    console.log(`Nothing is assigned to "${key}" key.`)
-  };
+    if (key == " ") {
+      if (time.stopped) {
+        start();
+      } else if (!time.stopped) {
+        stop();
+      };
+    } else {
+      console.log(`Nothing is assigned to "${key}" key.`)
+    };
+  });
 });
