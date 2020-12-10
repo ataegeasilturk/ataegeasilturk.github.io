@@ -68,12 +68,14 @@ function start() {
     '<a class="btn btn-primary" id="stop-btn" onclick="stop()">Stop</a>';
 };
 
-let saveCount;
+let saveCount = 0;
+const saveList = document.getElementById("savings");
+const nothingHere = document.querySelector("#nothing-here")
 
 function save() {
-  let min;
   let second;
   let ss;
+  let min;
   if (time.dk < 10) {
     min = `0${time.dk}`
   } else {
@@ -91,10 +93,21 @@ function save() {
   } else {
     ss = `${time.ms}`;
   };
-  saveCount = +1;
-  saveList = document.getElementById("savings");
-  // saveList.innerHTML = `${saveList.innerHTML}<li class="list-group-item d-flex justify-content-center" style="font-size:1.5rem;" id="save"><a href="#" data-toggle="tooltip" data-placement="top" title="Click to delete!">${min}:${second}:${ss}</a></li>`;
-  saveList.innerHTML = `${saveList.innerHTML}<li class="list-group-item d-flex justify-content-center" style="font-size:1.5rem;" id="save"><a href="#">${min}:${second}:${ss}</a></li>`;
+  console.log(saveCount);
+  if (saveCount == 0) {
+    nothingHere.remove();
+    saveList.innerHTML = `<li class="list-group-item d-flex justify-content-center" style="font-size:1.5rem;" id="save"><a href="#">${min}:${second}:${ss}</a></li>`
+    saveCount = 1;
+  } else {
+    saveCount = saveCount + 1;
+    // saveList.innerHTML = `${saveList.innerHTML}<li class="list-group-item d-flex justify-content-center" style="font-size:1.5rem;" id="save"><a href="#" data-toggle="tooltip" data-placement="top" title="Click to delete!">${min}:${second}:${ss}</a></li>`;
+    saveList.innerHTML = `${saveList.innerHTML}<li class="list-group-item d-flex justify-content-center" style="font-size:1.5rem;" id="save"><a href="#">${min}:${second}:${ss}</a></li>`;
+  }
+};
+
+function clearAllSave() {
+  saveList.innerHTML = '<h5 class="text-center" style="margin-bottom:25px;" id="nothing-here">You are not saved anything yet!</h5>';
+  saveCount = 0;
 };
 
 // function clearSave() {
@@ -110,18 +123,19 @@ function save() {
 // });
 
 // Keyboard Shortcuts
-document.addEventListener("DOMContentLoaded", function (e) {
-  document.addEventListener("keydown", function (e) {
-    let key = e.key
 
-    if (key == " ") {
-      if (time.stopped) {
-        start();
-      } else if (!time.stopped) {
-        stop();
-      };
-    } else {
-      console.log(`Nothing is assigned to "${key}" key.`)
-    };
-  });
-});
+// document.addEventListener("DOMContentLoaded", function (e) {
+//   document.addEventListener("keydown", function (e) {
+//     let key = e.key
+
+//     if (key == " ") {
+//       if (time.stopped) {
+//         start();
+//       } else if (!time.stopped) {
+//         stop();
+//       };
+//     } else {
+//       console.log(`Nothing is assigned to "${key}" key.`)
+//     };
+//   });
+// });

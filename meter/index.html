@@ -1,116 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="A website which contains projects by Ata Ege Asiltürk."
-    />
-    <title>00:00 | Chronometer</title>
-    <link rel="stylesheet" href="main.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
-  </head>
-  <!--  <ul class="list-group list-group-flush">
-    <li class="list-group-item">Cras justo odio</li>
-    <li class="list-group-item">Dapibus ac facilisis in</li>
-    <li class="list-group-item">Vestibulum at eros</li>
-  </ul>
--->
-  <body>
-    <div class="d-flex flex-row mb-3 justify-content-around">
-      <div class="col-sm-3 flex-row d-flex justify-content-between">
-        <div class="card col-6" style="margin-top: 50px; margin-bottom: 20px">
-          <div class="card-body">
-            <h5 class="card-title text-center">Saved</h5>
-          </div>
-          <h6>
-            <ul
-              class="list-group list-group-flush text-center"
-              id="savings"
-            ></ul>
-          </h6>
-          <div id="save-buttons" class="text-center">
-            <a
-              class="btn btn-danger"
-              onclick="clearSave()"
-              style="margin-bottom: 10px; margin-right: 10px"
-              >Reset</a
-            >
-          </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A website which contains projects by Ata Ege Asiltürk." />
+  <title>00:00 | Chronometer</title>
+  <link rel="stylesheet" href="main.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="d-flex flex-row mb-3 justify-content-around">
+    <div class="col-sm-3 flex-row d-flex justify-content-between">
+      <div class="card col-6" style="margin-top: 50px; margin-bottom: 20px">
+        <div class="card-body">
+          <h5 class="card-title text-center">Saved</h5>
         </div>
-        <div
-          class="card col-6"
-          style="margin-top: 50px; margin-bottom: 20px; margin-left: 10px"
-        >
-          <div class="card-body">
-            <h5 class="card-title text-center">Chronometer</h5>
-            <p class="card-text">
-              <!-- <h6 class="text-center" style="padding-left: 5rem;"><span id="minute-num">0</span> minutes
+        <h6>
+          <ul class="list-group list-group-flush text-center" id="savings">
+            <h5 class="text-center" style="margin-bottom:25px;" id="nothing-here">You are not saved anything yet!</h5>
+          </ul>
+        </h6>
+        <div id="save-buttons" class="text-center">
+          <a class="btn btn-danger" onclick="clearAllSave()" style="margin-bottom: 10px; margin-right: 10px">Reset</a>
+        </div>
+      </div>
+      <div class="card col-6" style="margin-top: 50px; margin-bottom: 20px; margin-left: 10px">
+        <div class="card-body">
+          <h5 class="card-title text-center">Chronometer</h5>
+          <p class="card-text">
+            <!-- <h6 class="text-center" style="padding-left: 5rem;"><span id="minute-num">0</span> minutes
               <span id="second-num">0</span> seconds
               <span id="ms-num">0</span> split seconds</h6> -->
-              <strong
-                ><h6
-                  class="d-flex justify-content-center"
-                  style="font-size: 2em"
-                >
-                  <span id="minute-num">00</span>:<span id="second-num">00</span
-                  ><sub><span id="ms-num">00</span></sub>
-                </h6></strong
-              >
-            </p>
-            <div id="buttons" class="text-center">
-              <span id="start-stop">
-                <a class="btn btn-success" id="start-btn" onclick="start()"
-                  >Start</a
-                >
-              </span>
-              <a class="btn btn-danger" onclick="reset()">Reset</a>
-              <a class="btn btn-info" onclick="save()">Save</a>
-            </div>
+            <strong>
+              <h6 class="d-flex justify-content-center" style="font-size: 2em">
+                <span id="minute-num">00</span>:<span id="second-num">00</span><sub><span id="ms-num">00</span></sub>
+              </h6>
+            </strong>
+          </p>
+          <div id="buttons" class="text-center">
+            <span id="start-stop">
+              <a class="btn btn-success" id="start-btn" onclick="start()">Start</a>
+            </span>
+            <a class="btn btn-danger" onclick="reset()">Reset</a>
+            <a class="btn btn-info" onclick="save()">Save</a>
           </div>
         </div>
       </div>
     </div>
-    <p style="text-align: center">
-      by
-      <a target="_blank" href="https://github.com/ataegeasilturk"
-        >Ata Ege Asiltürk</a
-      >
-      <br />
-      <a href="../">Turn to main page!</a>
-    </p>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
-      integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"
-      integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://kit.fontawesome.com/82ffb14081.js"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://code.jquery.com/jquery-3.5.1.js"
-      integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-      crossorigin="anonymous"
-    ></script>
-    <script type="text/javascript" src="app.js"></script>
-  </body>
+  </div>
+  <p style="text-align: center">
+    by
+    <a target="_blank" href="https://github.com/ataegeasilturk">Ata Ege Asiltürk</a>
+    <br />
+    <a href="../">Turn to main page!</a>
+  </p>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+    integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"
+    integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous">
+  </script>
+  <script src="https://kit.fontawesome.com/82ffb14081.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+  <script type="text/javascript" src="app.js"></script>
+</body>
+
 </html>
