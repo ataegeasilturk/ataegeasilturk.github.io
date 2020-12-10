@@ -54,18 +54,19 @@ function reset() {
   time.ms = 00;
   time.sn = 00;
   time.dk = 00;
-}
+};
 
 function stop() {
   time.stopped = 1;
   ssButton.innerHTML =
     '<a class="btn btn-success" id="start-btn" onclick="start()">Start</a>';
-}
+};
+
 function start() {
   time.stopped = 0;
   ssButton.innerHTML =
     '<a class="btn btn-primary" id="stop-btn" onclick="stop()">Stop</a>';
-}
+};
 
 let saveCount;
 
@@ -92,7 +93,8 @@ function save() {
   };
   saveCount=+1;
   saveList = document.getElementById("savings");
-  saveList.innerHTML = `${saveList.innerHTML}<li class="list-group-item d-flex justify-content-center" style="font-size:1.5rem;" id="save" onclick="clearSave()"><a href="#" data-toggle="tooltip" data-placement="top" title="Click to delete!">${min}:${second}:${ss}</a></li>`;
+  // saveList.innerHTML = `${saveList.innerHTML}<li class="list-group-item d-flex justify-content-center" style="font-size:1.5rem;" id="save"><a href="#" data-toggle="tooltip" data-placement="top" title="Click to delete!">${min}:${second}:${ss}</a></li>`;
+  saveList.innerHTML = `${saveList.innerHTML}<li class="list-group-item d-flex justify-content-center" style="font-size:1.5rem;" id="save"><a href="#">${min}:${second}:${ss}</a></li>`;
 };
 
 function clearSave() {
@@ -101,4 +103,24 @@ function clearSave() {
   $("#save").click(function(){
     this.remove()
   });
+};
+
+// saveElement.addEventListener("click", function(e){
+//    console.log(e.target);
+// });
+
+// Keyboard Shortcuts
+
+document.addEventListener("keydown", function(e){
+  let key = e.key
+
+  if (key == " ") {
+    if (time.stopped) {
+      start();
+    } else if (!time.stopped) {
+      stop();
+    } 
+  } else {
+    console.log(`Nothing is assigned to "${key}" key.`)
   };
+});
