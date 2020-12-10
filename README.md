@@ -11,7 +11,7 @@ A basic chronometer project. You can start, stop, reset and save the current tim
 
 ###### Some known issues
 
-You can only delete first save.
+You can only delete the first record.
 
 ### Todo List
 
