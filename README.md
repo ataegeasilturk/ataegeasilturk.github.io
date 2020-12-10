@@ -9,7 +9,7 @@ A web page which contains projects by Ata Ege Asiltürk.
 
 A basic chronometer project. You can start, stop, reset and save the current time. Some fixes soon...
 
-###### Some known issues
+##### Some known issues
 
 You cannot delete individual records.
 
