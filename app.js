@@ -10,3 +10,13 @@ function chronoSpoiler() {
         open = 0;
     }
 };
+
+const comingSoon = document.querySelector("#coming-soon-btn");
+
+comingSoon.addEventListener("click", function (event) {
+    alert("There is nothing to see here in my Todo List project. It will be available soon.");
+    console.info("There is nothing to see here in my Todo List project. It will be available soon.");
+});
+
+// Event listener functions
+
