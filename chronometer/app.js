@@ -113,6 +113,14 @@ function save() {
 };
 
 function clearAllSave() {
+  if (saveCount == 0) {
+    console.log("You have nothing to reset!")
+    saveList.innerHTML = '<h5 class="text-center" style="margin-bottom:25px;" id="nothing-here">You have nothing to reset!</h5>';
+    setTimeout(function(){
+    saveList.innerHTML = '<h5 class="text-center" style="margin-bottom:25px;" id="nothing-here">You are not saved anything yet!</h5>';
+    }, 2000)
+    return
+  }
   if (confirm("Are you sure you want to reset saves?")) {
     saveList.innerHTML = '<h5 class="text-center" style="margin-bottom:25px;" id="nothing-here">You are not saved anything yet!</h5>';
     saveCount = 0;
