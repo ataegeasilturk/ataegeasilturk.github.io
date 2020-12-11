@@ -48,6 +48,7 @@ setInterval(function () {
 }, 10);
 
 function reset() {
+  console.log(`Chronometer successfully reseted at ${time.dk}:${time.sn}`);
   minuteTag.innerText = "00";
   secondTag.innerText = "00";
   msTag.innerText = "00";
@@ -73,41 +74,52 @@ const saveList = document.getElementById("savings");
 const nothingHere = document.querySelector("#nothing-here")
 
 function save() {
-  let second;
-  let ss;
-  let min;
-  if (time.dk < 10) {
-    min = `0${time.dk}`
+  if (saveCount > 20) {
+    alert("Max save limit 20 reached.")
+    return
   } else {
-    min = `${time.dk}`
-  };
+    let second;
+    let ss;
+    let min;
+    if (time.dk < 10) {
+      min = `0${time.dk}`
+    } else {
+      min = `${time.dk}`
+    };
 
-  if (time.sn < 10) {
-    second = `0${time.sn}`;
-  } else {
-    second = `${time.sn}`;
-  };
+    if (time.sn < 10) {
+      second = `0${time.sn}`;
+    } else {
+      second = `${time.sn}`;
+    };
 
-  if (time.ms < 10) {
-    ss = `0${time.ms}`;
-  } else {
-    ss = `${time.ms}`;
+    if (time.ms < 10) {
+      ss = `0${time.ms}`;
+    } else {
+      ss = `${time.ms}`;
+    };
+    console.log(saveCount);
+    if (saveCount == 0) {
+      nothingHere.remove();
+      saveList.innerHTML = `<li class="list-group-item d-flex justify-content-center" style="font-size:1.5rem;" id="save"><a href="#">${min}:${second}:${ss}</a></li>`
+      saveCount = 1;
+    } else {
+      saveCount = saveCount + 1;
+      // saveList.innerHTML = `${saveList.innerHTML}<li class="list-group-item d-flex justify-content-center" style="font-size:1.5rem;" id="save"><a href="#" data-toggle="tooltip" data-placement="top" title="Click to delete!">${min}:${second}:${ss}</a></li>`;
+      saveList.innerHTML = `${saveList.innerHTML}<li class="list-group-item d-flex justify-content-center" style="font-size:1.5rem;" id="save"><a href="#">${min}:${second}:${ss}</a></li>`;
+    }
+    console.log(`Save limit ${saveCount}/20`)
   };
-  console.log(saveCount);
-  if (saveCount == 0) {
-    nothingHere.remove();
-    saveList.innerHTML = `<li class="list-group-item d-flex justify-content-center" style="font-size:1.5rem;" id="save"><a href="#">${min}:${second}:${ss}</a></li>`
-    saveCount = 1;
-  } else {
-    saveCount = saveCount + 1;
-    // saveList.innerHTML = `${saveList.innerHTML}<li class="list-group-item d-flex justify-content-center" style="font-size:1.5rem;" id="save"><a href="#" data-toggle="tooltip" data-placement="top" title="Click to delete!">${min}:${second}:${ss}</a></li>`;
-    saveList.innerHTML = `${saveList.innerHTML}<li class="list-group-item d-flex justify-content-center" style="font-size:1.5rem;" id="save"><a href="#">${min}:${second}:${ss}</a></li>`;
-  }
 };
 
 function clearAllSave() {
-  saveList.innerHTML = '<h5 class="text-center" style="margin-bottom:25px;" id="nothing-here">You are not saved anything yet!</h5>';
-  saveCount = 0;
+  if (confirm("Are you sure you want to reset saves?")) {
+    saveList.innerHTML = '<h5 class="text-center" style="margin-bottom:25px;" id="nothing-here">You are not saved anything yet!</h5>';
+    saveCount = 0;
+  } else {
+    console.log("Reseting all saves canceled.")
+  }
+
 };
 
 // Keyboard Shortcuts
@@ -122,6 +134,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
       } else if (!time.stopped) {
         stop();
       };
+    } else if (key == "Delete") {
+      reset();
     } else {
       console.log(`Nothing is assigned to "${key}" key.`)
     };
