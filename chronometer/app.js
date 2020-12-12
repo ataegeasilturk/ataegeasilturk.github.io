@@ -9,6 +9,43 @@ let time = {
   stopped: 1,
 };
 
+const darkMode = document.querySelector("#toggle-darkmode");
+let colorMode = localStorage.getItem("darkMode");
+
+document.addEventListener("DOMContentLoaded", function (event) {
+  const body = document.querySelector("body");
+  const card = document.querySelectorAll(".card");
+  let colorMode = localStorage.getItem("darkMode");
+  if (colorMode == 1) {
+    try {
+      body.classList.add("dark-mode");
+      card.forEach(function (cardElement) {
+        cardElement.classList.add("dark-mode");
+      });
+      darkMode.classList = "btn btn-light";
+      darkMode.innerHTML = '<i class="fas fa-sun" id="toggle-darkmode" alt="Click to toggle dark mode!"></i>';
+    } catch (e) {
+      console.info("An error occurred while turning dark mode on. Please try again later.")
+      console.info(`Error: ${e}`)
+    }
+  } else if (colorMode == 0 || colorMode == null) {
+    try {
+      body.classList.remove("dark-mode");
+      card.forEach(function (cardElement) {
+        cardElement.classList.remove("dark-mode");
+      });
+      darkMode.classList = "btn btn-dark";
+      darkMode.innerHTML = '<i class="fas fa-moon" id="toggle-darkmode" alt="Click to toggle dark mode!"></i>';
+      localStorage.setItem("darkMode", 0);
+    } catch (e) {
+      console.info("An error occurred while turning dark mode on. Please try again later.")
+      console.info(`Error: ${e}`)
+    }
+  } else {
+    console.error("An error occurred while turning dark mode on. Please report this issue from GitHub.")
+  }
+});
+
 setInterval(function () {
   if (time.stopped) return;
   msTag.innerText = time.ms + 1;
@@ -100,13 +137,26 @@ function save() {
     };
     console.log(saveCount);
     if (saveCount == 0) {
-      nothingHere.remove();
-      saveList.innerHTML = `<li class="list-group-item d-flex justify-content-center" style="font-size:1.5rem;" id="save"><a href="#">${min}:${second}:${ss}</a></li>`
-      saveCount = 1;
+      if (colorMode == 1) {
+        nothingHere.remove();
+        saveList.innerHTML = `<li class="list-group-item d-flex justify-content-center li-dark" style="font-size:1.5rem;" id="save"><a href="#" class="li-dark">${min}:${second}:${ss}</a></li>`
+        saveCount = 1;
+      } else {
+        nothingHere.remove();
+        saveList.innerHTML = `<li class="list-group-item d-flex justify-content-center" style="font-size:1.5rem;" id="save"><a href="#">${min}:${second}:${ss}</a></li>`
+        saveCount = 1;
+      }
     } else {
-      saveCount = saveCount + 1;
-      // saveList.innerHTML = `${saveList.innerHTML}<li class="list-group-item d-flex justify-content-center" style="font-size:1.5rem;" id="save"><a href="#" data-toggle="tooltip" data-placement="top" title="Click to delete!">${min}:${second}:${ss}</a></li>`;
-      saveList.innerHTML = `${saveList.innerHTML}<li class="list-group-item d-flex justify-content-center" style="font-size:1.5rem;" id="save"><a href="#">${min}:${second}:${ss}</a></li>`;
+      if (colorMode == 1) {
+        saveCount = saveCount + 1;
+        // saveList.innerHTML = `${saveList.innerHTML}<li class="list-group-item d-flex justify-content-center" style="font-size:1.5rem;" id="save"><a href="#" data-toggle="tooltip" data-placement="top" title="Click to delete!">${min}:${second}:${ss}</a></li>`;
+        saveList.innerHTML = `${saveList.innerHTML}<li class="list-group-item d-flex justify-content-center li-dark" style="font-size:1.5rem;" id="save"><a href="#" class="li-dark">${min}:${second}:${ss}</a></li>`;
+      } else {
+        saveCount = saveCount + 1;
+        // saveList.innerHTML = `${saveList.innerHTML}<li class="list-group-item d-flex justify-content-center" style="font-size:1.5rem;" id="save"><a href="#" data-toggle="tooltip" data-placement="top" title="Click to delete!">${min}:${second}:${ss}</a></li>`;
+        saveList.innerHTML = `${saveList.innerHTML}<li class="list-group-item d-flex justify-content-center" style="font-size:1.5rem;" id="save"><a href="#">${min}:${second}:${ss}</a></li>`;
+
+      }
     }
     console.log(`Save limit ${saveCount}/20`)
   };
@@ -116,8 +166,8 @@ function clearAllSave() {
   if (saveCount == 0) {
     console.log("You have nothing to reset!")
     saveList.innerHTML = '<h5 class="text-center" style="margin-bottom:25px;" id="nothing-here">You have nothing to reset!</h5>';
-    setTimeout(function(){
-    saveList.innerHTML = '<h5 class="text-center" style="margin-bottom:25px;" id="nothing-here">You are not saved anything yet!</h5>';
+    setTimeout(function () {
+      saveList.innerHTML = '<h5 class="text-center" style="margin-bottom:25px;" id="nothing-here">You are not saved anything yet!</h5>';
     }, 2000)
     return
   }
@@ -148,4 +198,48 @@ document.addEventListener("DOMContentLoaded", function (e) {
       console.log(`Nothing is assigned to "${key}" key.`)
     };
   });
+});
+
+document.querySelector("body").addEventListener("click", function (e) {
+  let target = e.target;
+  if (!target.parentElement.className.includes("list-group-item")) return;
+  target.parentElement.remove();
+  saveCount = saveCount - 1;
+  console.log(saveCount)
+  if (!saveCount == 0) return;
+  saveList.innerHTML = '<h5 class="text-center" style="margin-bottom:25px;" id="nothing-here">You have nothing to reset!</h5>';
+});
+
+darkMode.addEventListener("click", function (event) {
+  const body = document.querySelector("body");
+  const card = document.querySelectorAll(".card");
+  if (colorMode == 0 || colorMode == null) {
+    try {
+      body.classList.add("dark-mode");
+      card.forEach(function (cardElement) {
+        cardElement.classList.add("dark-mode");
+      });
+      darkMode.classList = "btn btn-light";
+      darkMode.innerHTML = '<i class="fas fa-sun" id="toggle-darkmode" alt="Click to toggle dark mode!"></i>';
+      localStorage.setItem("darkMode", 1);
+    } catch (e) {
+      console.info("An error occurred while turning dark mode on. Please try again later.")
+      console.error(e)
+    }
+  } else if (colorMode == 1) {
+    try {
+      body.classList.remove("dark-mode");
+      card.forEach(function (cardElement) {
+        cardElement.classList.remove("dark-mode");
+      });
+      darkMode.classList = "btn btn-dark";
+      darkMode.innerHTML = '<i class="fas fa-moon" id="toggle-darkmode" alt="Click to toggle dark mode!"></i>';
+      localStorage.setItem("darkMode", 0);
+    } catch (e) {
+      console.info("An error occurred while turning dark mode on. Please try again later.")
+      console.error(e)
+    }
+  } else {
+    console.error(`An error occurred. Please report this issue from github.com/ataegeasilturk`)
+  }
 });
