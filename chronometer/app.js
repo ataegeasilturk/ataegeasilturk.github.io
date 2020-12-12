@@ -111,7 +111,7 @@ const saveList = document.getElementById("savings");
 const nothingHere = document.querySelector("#nothing-here")
 
 function save() {
-  if (saveCount > 20) {
+  if (saveCount >= 20) {
     alert("Max save limit 20 reached.")
     return
   } else {
@@ -139,22 +139,22 @@ function save() {
     if (saveCount == 0) {
       if (colorMode == 1) {
         nothingHere.remove();
-        saveList.innerHTML = `<li class="list-group-item d-flex justify-content-center li-dark" style="font-size:1.5rem;" id="save"><a href="#" class="li-dark">${min}:${second}:${ss}</a></li>`
+        saveList.innerHTML = `<li class="list-group-item d-flex justify-content-center li-dark" style="font-size:1.5rem;" id="save"><span class="li-dark">${min}:${second}:${ss}</span><a href="#" class="delete-item" style="margin-left: 0.8rem;"><i class="fa fa-remove" style="color:#ebebeb;"></i></a></li>`
         saveCount = 1;
       } else {
         nothingHere.remove();
-        saveList.innerHTML = `<li class="list-group-item d-flex justify-content-center" style="font-size:1.5rem;" id="save"><a href="#">${min}:${second}:${ss}</a></li>`
+        saveList.innerHTML = `<li class="list-group-item d-flex justify-content-center" style="font-size:1.5rem;" id="save"><span>${min}:${second}:${ss}</span><a href="#" class="delete-item" style="margin-left: 0.8rem;"><i class="fa fa-remove"></i></a></li>`
         saveCount = 1;
       }
     } else {
       if (colorMode == 1) {
         saveCount = saveCount + 1;
         // saveList.innerHTML = `${saveList.innerHTML}<li class="list-group-item d-flex justify-content-center" style="font-size:1.5rem;" id="save"><a href="#" data-toggle="tooltip" data-placement="top" title="Click to delete!">${min}:${second}:${ss}</a></li>`;
-        saveList.innerHTML = `${saveList.innerHTML}<li class="list-group-item d-flex justify-content-center li-dark" style="font-size:1.5rem;" id="save"><a href="#" class="li-dark">${min}:${second}:${ss}</a></li>`;
+        saveList.innerHTML = `${saveList.innerHTML}<li class="list-group-item d-flex justify-content-center li-dark" style="font-size:1.5rem;" id="save"><span class="li-dark">${min}:${second}:${ss}</span><a href="#" class="delete-item" style="margin-left: 0.8rem;"><i class="fa fa-remove" style="color:#ebebeb;"></i></a></li>`;
       } else {
         saveCount = saveCount + 1;
         // saveList.innerHTML = `${saveList.innerHTML}<li class="list-group-item d-flex justify-content-center" style="font-size:1.5rem;" id="save"><a href="#" data-toggle="tooltip" data-placement="top" title="Click to delete!">${min}:${second}:${ss}</a></li>`;
-        saveList.innerHTML = `${saveList.innerHTML}<li class="list-group-item d-flex justify-content-center" style="font-size:1.5rem;" id="save"><a href="#">${min}:${second}:${ss}</a></li>`;
+        saveList.innerHTML = `${saveList.innerHTML}<li class="list-group-item d-flex justify-content-center" style="font-size:1.5rem;" id="save"><span>${min}:${second}:${ss}</span><a href="#" class="delete-item" style="margin-left: 0.8rem;"><i class="fa fa-remove"></i></a></li>`;
 
       }
     }
@@ -194,6 +194,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
       };
     } else if (key == "Delete") {
       reset();
+    } else if (key == "Enter") {
+      save();
     } else {
       console.log(`Nothing is assigned to "${key}" key.`)
     };
@@ -202,8 +204,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
 document.querySelector("body").addEventListener("click", function (e) {
   let target = e.target;
-  if (!target.parentElement.className.includes("list-group-item")) return;
-  target.parentElement.remove();
+  if (!target.parentElement.className.includes("delete-item")) return;
+  target.parentElement.parentElement.remove();
   saveCount = saveCount - 1;
   console.log(saveCount)
   if (!saveCount == 0) return;
