@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     const body = document.querySelector("body");
     const card = document.querySelectorAll(".card");
     const btnPrimary = document.querySelectorAll(".btn-primary");
+    const chronoSpoiler = document.querySelector("#chrono-spoiler");
     let colorMode = localStorage.getItem("darkMode");
     if (colorMode == 1) {
         try {
@@ -12,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             card.forEach(function (cardElement) {
                 cardElement.classList.add("dark-mode");
             });
+            chronoSpoiler.innerHTML = `<img src="images/dark_chrono_spoiler.jpg" alt="Chronometer spoiler" onclick="chronoSpoiler()" id="chrono-spoiler"/>`;
             btnPrimary.forEach(function (cardElement) {
                 cardElement.classList.add("btn-primary-dark");
             });
@@ -42,18 +44,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
     }
 });
 
-function chronoSpoiler() {
-    if (open == 0) {
-        let spoiler = document.querySelector("#chrono-spoiler");
-        spoiler.style.filter = "blur(0.00001px)";
-        open = 1;
-    } else {
-        let spoiler = document.querySelector("#chrono-spoiler");
-        spoiler.style.filter = "blur(5px)";
-        open = 0;
-    }
-};
-
 const comingSoon = document.querySelector("#coming-soon-btn");
 const darkMode = document.querySelector("#toggle-darkmode");
 
@@ -67,6 +57,7 @@ comingSoon.addEventListener("click", function (event) {
 darkMode.addEventListener("click", function (event) {
     const body = document.querySelector("body");
     const card = document.querySelectorAll(".card");
+    const chronoSpoiler = document.querySelector("#chrono-spoiler");
     const btnPrimary = document.querySelectorAll(".btn-primary");
     if (colorMode == 0 || colorMode == null) {
         try {
@@ -77,6 +68,7 @@ darkMode.addEventListener("click", function (event) {
             btnPrimary.forEach(function (cardElement) {
                 cardElement.classList.add("btn-primary-dark");
             });
+            chronoSpoiler.innerHTML = `<img src="images/dark_chrono_spoiler.jpg" alt="Chronometer spoiler" onclick="chronoSpoiler()" id="chrono-spoiler"/>`;
             darkMode.classList = "btn btn-light";
             darkMode.innerHTML = '<i class="fas fa-sun" id="toggle-darkmode" alt="Click to toggle dark mode!"></i>';
             localStorage.setItem("darkMode", 1);
@@ -93,6 +85,7 @@ darkMode.addEventListener("click", function (event) {
             btnPrimary.forEach(function (cardElement) {
                 cardElement.classList.remove("btn-primary-dark");
             });
+            chronoSpoiler.innerHTML = `<img src="images/chrono_spoiler.jpg" alt="Chronometer spoiler" onclick="chronoSpoiler()" id="chrono-spoiler"/>`;
             darkMode.classList = "btn btn-dark";
             darkMode.innerHTML = '<i class="fas fa-moon" id="toggle-darkmode" alt="Click to toggle dark mode!"></i>';
             localStorage.setItem("darkMode", 0);
